@@ -1,0 +1,24 @@
+#!/bin/sh
+
+setbg &		# Set the background
+sxhkd &	# Bind keys
+# Properties button extra Mod/Escape
+xset r rate 300 50 &	# Speed xrate up
+unclutter &		# Remove mouse when idle
+compton   &		# xcompmgr for transparency
+dunst &			# dunst for notifications
+nm-applet &
+#dwmbar &
+nitrogen --restore &
+setxkbmap -model pc104 -layout us,bg -variant ,phonetic ,, -option grp:alt_shift_toggle
+
+~/.config/polybar/launch.sh &
+
+# This loop will run the `refbar` script to refresh the statusbar whenever a
+# command changes the music player's status.
+while pgrep -x mpd; do
+	mpc idle >/dev/null 2>&1
+
+
+done &
+notify-send "Welcome back"
